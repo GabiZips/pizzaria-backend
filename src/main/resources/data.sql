@@ -66,3 +66,4 @@ INSERT INTO cardapio_produto (cardapio_id,produto_id) VALUES (1,3);
 
 INSERT INTO cardapio_produto (cardapio_id,produto_id) VALUES (2,1);
 INSERT INTO cardapio_produto (cardapio_id,produto_id) VALUES (2,3);
+insert into preferencias_pizzaria (id, cardapio_id, desconto_codigo) values (1, 1, 'SemDesconto');

@@ -63,3 +63,12 @@ create table if not exists cardapio_produto (
   foreign key (cardapio_id) references cardapios(id),
   foreign key (produto_id) references produtos(id)
 );
+create table preferencias_pizzaria (
+    id integer primary key check (id = 1),
+    cardapio_id bigint not null references cardapios(id),
+    desconto_codigo varchar(255) not null
+);
+
+create table produto_indisponivel (
+    produto_id bigint primary key references produtos(id)
+);
