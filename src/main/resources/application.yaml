@@ -11,7 +11,7 @@ spring:
       data-locations: classpath:data.sql
   h2:
     console:
-      enabled: true
+      enabled: false
       path: /h2
   jpa:
     open-in-view: false

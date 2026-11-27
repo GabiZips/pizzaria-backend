@@ -11,5 +11,6 @@ public interface PedidosRepository {
     Optional<PedidoRegistrado> buscar(long id);
     long contarPagosDesde(String email, LocalDateTime inicio, LocalDateTime fim);
     List<PedidoRegistrado> porEstado(Estado estado);
+    List<Long> idsDeAprovadosAte(LocalDateTime limite);
     List<PedidoRegistrado> entregues(String email, LocalDateTime de, LocalDateTime ateExclusivo);
 }

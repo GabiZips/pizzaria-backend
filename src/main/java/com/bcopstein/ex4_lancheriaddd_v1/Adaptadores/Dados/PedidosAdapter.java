@@ -64,6 +64,18 @@ public class PedidosAdapter implements PedidosRepository {
                 .map(this::converter).toList();
     }
 
+    @Override
+    public List<Long> idsDeAprovadosAte(LocalDateTime limite) {
+        return banco.createQuery("""
+                select p.id from PedidoEntity p
+                where p.estado = :estado and p.pagoEm is null and p.aprovadoEm <= :limite
+                order by p.aprovadoEm, p.id
+                """, Long.class)
+                .setParameter("estado", Estado.APROVADO)
+                .setParameter("limite", limite)
+                .getResultList();
+    }
+
     public List<PedidoRegistrado> entregues(String email, LocalDateTime de, LocalDateTime ateExclusivo) {
         return banco.createQuery("""
                 from PedidoEntity p where p.email = :email and p.estado = :estado

@@ -5,7 +5,5 @@ import java.security.Principal;
 final class ClienteDaRequisicao {
     private ClienteDaRequisicao() {}
 
-    static String email(Principal principal) {
-        return principal == null ? "huguinho.pato@email.com" : principal.getName();
-    }
+    static String email(Principal principal) { return principal.getName(); }
 }

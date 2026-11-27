@@ -42,7 +42,26 @@ public class CancelarPedidoUC {
         cancelar(pedido, LocalDateTime.now(relogio));
     }
 
-    void cancelar(PedidoRegistrado pedido, LocalDateTime agora) {
+    static LocalDateTime limiteAprovacao(LocalDateTime agora) {
+        return agora.minusMinutes(30);
+    }
+
+    static boolean expirado(PedidoRegistrado pedido, LocalDateTime agora) {
+        return !pedido.aprovadoEm().isAfter(limiteAprovacao(agora));
+    }
+
+    @Transactional
+    public void cancelarSeExpirado(long id) {
+        preferencias.bloquearAlteracoes();
+        var pedido = pedidos.buscar(id).orElse(null);
+        var agora = LocalDateTime.now(relogio);
+        if (pedido != null && pedido.estado() == Estado.APROVADO
+                && pedido.pagoEm() == null && expirado(pedido, agora)) {
+            cancelar(pedido, agora);
+        }
+    }
+
+    private void cancelar(PedidoRegistrado pedido, LocalDateTime agora) {
         try {
             estoque.devolver(pedido.reserva());
         } catch (ArithmeticException erro) {

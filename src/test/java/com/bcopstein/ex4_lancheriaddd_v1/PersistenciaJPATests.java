@@ -27,7 +27,7 @@ import com.bcopstein.ex4_lancheriaddd_v1.Dominio.Entidades.Produto;
 
 // Usa um banco separado para nao compartilhar os dados com outros contextos de teste.
 @SpringBootTest(properties = "spring.datasource.url=jdbc:h2:mem:pizzadb-jpa-tests;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE")
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class PersistenciaJPATests {
 
     @Autowired

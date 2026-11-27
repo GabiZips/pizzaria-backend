@@ -111,3 +111,7 @@ create table pedido_historico (
     quando timestamp not null,
     primary key (pedido_id, posicao)
 );
+
+alter table clientes add column senha_hash varchar(255);
+alter table clientes add column perfil varchar(255);
+alter table clientes add constraint clientes_email_unico unique (email);
